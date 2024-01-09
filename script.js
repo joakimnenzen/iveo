@@ -1,5 +1,29 @@
 $(".nav_link.tc-75.w--current").find(".nav_link-dot").addClass("is-active");
 
+// Show/hide menu on scroll
+const showAnim = gsap
+  .from(".header", {
+    yPercent: -100,
+    paused: true,
+    duration: 0.2,
+  })
+  .progress(1);
+
+ScrollTrigger.create({
+  start: "top top",
+  end: 99999,
+  onUpdate: (self) => {
+    self.direction === -1 ? showAnim.play() : showAnim.reverse();
+  },
+});
+
+// Adding click event listener to elements with the attribute "page-transition"
+document.querySelectorAll("[page-transition]").forEach((element) => {
+  element.addEventListener("click", () => {
+    showAnim.play();
+  });
+});
+
 window.addEventListener("DOMContentLoaded", (event) => {
   // Split text into spans
   let typeSplit = new SplitType("[text-split]", {
@@ -251,138 +275,6 @@ $(".section-gallery, .slides-wrapper, .splide").on("mouseenter", function () {
 $(".section-gallery, .slides-wrapper, .splide").on("mouseleave", function () {
   $(".cursor_dot").removeClass("display-cursor");
 });
-
-// Swiper
-function swiperCareer() {
-  document.addEventListener("DOMContentLoaded", function () {
-    var splide = new Splide(".swiper-career", {
-      type: "loop",
-      drag: "free",
-      gap: "1em",
-      arrows: false,
-      pagination: false,
-      perPage: 4,
-      autoScroll: {
-        pauseOnHover: true,
-        speed: 1,
-      },
-      breakpoints: {
-        1800: {
-          // Laptop
-          perPage: 3,
-          gap: "1em",
-        },
-        991: {
-          // Tablet
-          perPage: 2,
-          gap: "0.5em",
-        },
-        767: {
-          // Mobile Landscape
-          perPage: 1,
-          gap: "0.5em",
-          autoScroll: {
-            speed: 1,
-          },
-        },
-        479: {
-          // Mobile Portrait
-          perPage: 1,
-          gap: "0.5em",
-          autoScroll: {
-            speed: 1,
-          },
-        },
-      },
-    });
-    splide.mount(window.splide.Extensions);
-  });
-}
-swiperCareer();
-
-function swiperTeam() {
-  document.addEventListener("DOMContentLoaded", function () {
-    var splide = new Splide(".swiper-team", {
-      type: "loop",
-      drag: "free",
-      gap: "1em",
-      arrows: false,
-      pagination: false,
-      perPage: 4,
-      autoScroll: {
-        pauseOnHover: true,
-        speed: 1,
-      },
-      breakpoints: {
-        991: {
-          // Tablet
-          perPage: 3,
-          gap: "0.5em",
-        },
-        767: {
-          // Mobile Landscape
-          perPage: 1,
-          gap: "0.5em",
-          autoScroll: {
-            speed: 1,
-          },
-        },
-        479: {
-          // Mobile Portrait
-          perPage: 1,
-          gap: "0.5em",
-          autoScroll: {
-            speed: 1,
-          },
-        },
-      },
-    });
-    splide.mount(window.splide.Extensions);
-  });
-}
-swiperTeam();
-
-function swiperWork() {
-  document.addEventListener("DOMContentLoaded", function () {
-    var splide = new Splide(".swiper-work", {
-      type: "loop",
-      drag: "free",
-      gap: "1em",
-      arrows: false,
-      pagination: false,
-      perPage: 3,
-      autoScroll: {
-        pauseOnHover: true,
-        speed: 1,
-      },
-      breakpoints: {
-        991: {
-          // Tablet
-          perPage: 2,
-          gap: "0.5em",
-        },
-        767: {
-          // Mobile Landscape
-          perPage: 1,
-          gap: "0.5em",
-          autoScroll: {
-            speed: 1,
-          },
-        },
-        479: {
-          // Mobile Portrait
-          perPage: 1,
-          gap: "0.5em",
-          autoScroll: {
-            speed: 1,
-          },
-        },
-      },
-    });
-    splide.mount(window.splide.Extensions);
-  });
-}
-swiperWork();
 
 // LENIS SMOOTH SCROLL
 let lenis;
