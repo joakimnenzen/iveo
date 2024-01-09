@@ -1,6 +1,25 @@
 $(".nav_link.tc-75.w--current").find(".nav_link-dot").addClass("is-active");
 
-// Show/hide menu on scroll
+window.addEventListener("DOMContentLoaded", (event) => {
+  // Split text into spans
+  let typeSplit = new SplitType("[text-split]", {
+    types: "words",
+    tagName: "span",
+  });
+
+  // Page Load
+  function pageLoad() {
+    let tl = gsap.timeline();
+    tl.to(".page_main", {
+      opacity: 1,
+      ease: "power4.out",
+      duration: 0.2,
+      delay: 0.2,
+    });
+  }
+  pageLoad();
+
+  // Show/hide menu on scroll
 const showAnim = gsap
   .from(".header", {
     yPercent: -100,
@@ -23,25 +42,6 @@ document.querySelectorAll("[page-transition]").forEach((element) => {
     showAnim.play();
   });
 });
-
-window.addEventListener("DOMContentLoaded", (event) => {
-  // Split text into spans
-  let typeSplit = new SplitType("[text-split]", {
-    types: "words",
-    tagName: "span",
-  });
-
-  // Page Load
-  function pageLoad() {
-    let tl = gsap.timeline();
-    tl.to(".page_main", {
-      opacity: 1,
-      ease: "power4.out",
-      duration: 0.2,
-      delay: 0.2,
-    });
-  }
-  pageLoad();
 
   // Fade in elements
   function createScrollTrigger(triggerElement, timeline) {
